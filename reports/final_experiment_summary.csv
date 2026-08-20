@@ -1,0 +1,5 @@
+experiment,task,evaluation,n_buildings,n_test,n_parameters,identity_test_mse,model_test_mse,improvement_percent,conclusion
+MLP baseline,Fixed 2 m Douglas-Peucker target,"Random split, single Berlin area",166,34,33088,0.001203,0.002451,-103.7,Strong overfitting on small dataset
+Circular 1D-CNN,Fixed 2 m Douglas-Peucker target,Spatial holdout: Wedding + Lichtenberg,3282,856,1634,0.007128,0.007012,1.6,Best fixed-target spatial result
+Transformer,Fixed 2 m Douglas-Peucker target,Random split across eight Berlin areas,3282,657,69314,0.007481,0.007403,1.0,Small gain; no CNN advantage
+Geometry + context CNN,Context-adaptive 1/2/3 m Douglas-Peucker target,Spatial holdout: Wedding + Lichtenberg,3259,848,2130,0.005368,0.005309,1.1,Context-aware proof of concept

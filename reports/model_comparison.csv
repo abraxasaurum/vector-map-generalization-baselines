@@ -1,0 +1,4 @@
+model,dataset,n_buildings,n_train,n_parameters,identity_test_mse,model_test_mse,improvement_percent,interpretation
+Residual MLP,Single area (Charlottenburg),166,132,33088,0.001203,0.002451,-103.7,Strong overfitting
+Residual circular 1D-CNN,Eight Berlin areas,3282,2231,1634,0.007481,0.007366,1.5,Best test baseline
+Residual Transformer,Eight Berlin areas,3282,2231,69314,0.007481,0.007403,1.0,Small gain; no CNN advantage
