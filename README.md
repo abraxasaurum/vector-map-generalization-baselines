@@ -224,10 +224,48 @@ python src/create_context_adaptive_targets.py
 python src/prepare_context_sequences.py
 python src/train_context_cnn_spatial.py
 
-# 6. Reports
+# 6. Geometric evaluation on spatial-holdout test areas
+python src/evaluate_geometry_metrics.py
+
+# 7. Reports
 python src/create_experiment_report.py
 python src/create_final_report.py
 ```
+
+## Geometric quality checks
+
+In addition to normalized coordinate MSE, the spatial-holdout predictions are
+evaluated after reconstruction in `EPSG:25833`. This enables geometrically
+interpretable quality checks in metres.
+
+The evaluation script reports the following metrics separately for the fixed
+2 m and context-adaptive target tasks:
+
+- **Paired-point RMSE [m]:** Root mean squared distance between corresponding
+  resampled boundary points.
+- **Hausdorff distance [m]:** Maximum geometric discrepancy between predicted
+  and target polygon boundaries.
+- **Relative area error [%]:** Absolute predicted-versus-target area deviation,
+  normalized by target area.
+- **Valid prediction rate [%]:** Share of raw predicted closed polygons that
+  satisfy Shapely geometry-validity checks.
+
+Raw predictions are evaluated without automatic topology repair. This avoids
+hiding potential self-intersections or geometric artifacts through
+post-processing.
+
+Results are stored in:
+
+```text
+reports/geometry_quality_summary.csv
+reports/geometry_quality_per_building.csv
+reports/geometry_quality_comparison.png
+```
+
+Geometry metrics are compared only within the same target definition:
+
+- Fixed 2 m target: Identity baseline versus circular 1D-CNN.
+- Context-adaptive 1/2/3 m target: Identity baseline versus geometry-plus-context CNN.
 
 ## Limitations and next steps
 
